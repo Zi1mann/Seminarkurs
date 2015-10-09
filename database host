@@ -1,0 +1,10 @@
+09 Oktober 2015
+
+Umstellung von lokaler auf online Datenbank.
+db4free.net als Host verworfen und durch freemysqlhosting.net ersetzt, da dieser Service bessere Bandbreite und mehr
+Speicherplatz bietet. 
+
+Integration in das Programm:
+url = "jdbc:mysql://sql2.freemysqlhosting.net:3306/sql292459";
+username  = "sql292459";
+password = "[insert-here]";
