@@ -1,0 +1,28 @@
+	String formel = textFieldFormel.getText();
+				String[] formelHolder = formel.split("(?=\\p{Upper})");
+				
+				for (int i = 0; i < formelHolder.length; i++){
+					System.out.println(formelHolder[i]);
+					dbhandler.getMass(formelHolder[i]);
+					System.out.println("I: "+i+" Masse: " +dbhandler.getMass(formelHolder[i]));
+				}
+				
+				
+				//WITH:
+				public String getMass(String input){
+	String result = null;
+	String hinput = ("'"+input+"'");
+	try {
+		String query = ("select `Masse` from `elements` where Symbol = "+hinput);
+ 		rs = stt.executeQuery(query);
+ 		while (rs.next()){
+ 			String masse = rs.getString("Masse");
+ 			result = masse; 
+ 		}
+ 		} catch (Exception acc_ex){
+ 			System.out.println("Acces excpetion in .getMass: "+acc_ex);
+ 			return null; 
+ 		} finally {
+ 			return result; 
+ 		}
+	}
