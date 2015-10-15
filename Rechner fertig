@@ -1,0 +1,37 @@
+JButton btnNewButton = new JButton("Berechnen");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String formel = textFieldFormel.getText();
+				double konzentration = Double.parseDouble(textFieldZielC.getText());
+				double stoffmenge = Double.parseDouble(textFieldStoffmenge.getText());
+				double masse = 0.0;
+				double wasserV = 0.0;
+				String[] formelHolder = formel.split("(?=[A-Z])|(?<![0-9])(?=[0-9])");
+				double[] massHolder = new double[formelHolder.length];
+				for (int k = 0; k < formelHolder.length; k++){
+					String form = formelHolder[k];
+					if(form.matches("\\d+")){
+						double f = Double.parseDouble(form);
+						masse += massHolder[k-1]*(f-1);
+					} else {
+						massHolder[k] = Double.parseDouble(dbhandler.getMass(formelHolder[k]));
+						masse += massHolder[k];
+					}
+					System.out.println("Finally: "+masse);					
+				}
+				textAreaMasse.setText("");
+				textAreaResult.setText("");
+				if(comboBox.getSelectedIndex()==0){
+					wasserV = (masse*stoffmenge)/konzentration; 
+				} else {
+					lblMol.setText("g");
+					wasserV = (stoffmenge)/konzentration;
+					
+				}
+				textAreaResult.append(wasserV+" l");
+				textAreaMasse.append("M("+ formel+") = "+masse +" g/mol"); 
+				System.out.println("Volumen Wasser: "+wasserV+  " l");
+				masse = 0.0;
+				wasserV = 0.0;
+			}
+		});
